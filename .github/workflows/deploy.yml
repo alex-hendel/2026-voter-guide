@@ -22,7 +22,7 @@ jobs:
       - name: Copy files
         run: |
           mkdir -p pages-repo/dcision2026/headshots
-          cp voter_guide.html pages-repo/dcision2026/voterguide.html
+          cp voterguide.html pages-repo/dcision2026/voterguide.html
           cp headshots/*.png pages-repo/dcision2026/headshots/
 
       - name: Commit and push
