@@ -1,0 +1,35 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source repo
+        uses: actions/checkout@v4
+
+      - name: Checkout Pages repo
+        uses: actions/checkout@v4
+        with:
+          repository: alex-hendel/alex-hendel.github.io
+          token: ${{ secrets.PAGES_DEPLOY_TOKEN }}
+          path: pages-repo
+
+      - name: Copy files
+        run: |
+          mkdir -p pages-repo/dcision2026/headshots
+          cp voter_guide.html pages-repo/dcision2026/voterguide.html
+          cp headshots/*.png pages-repo/dcision2026/headshots/
+
+      - name: Commit and push
+        run: |
+          cd pages-repo
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add dcision2026/
+          git diff --cached --quiet || git commit -m "Deploy DCision 2026 voter guide"
+          git push
