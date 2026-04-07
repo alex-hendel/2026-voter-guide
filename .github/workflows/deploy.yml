@@ -21,9 +21,9 @@ jobs:
 
       - name: Copy files
         run: |
-          mkdir -p pages-repo/dcision2026/headshots
+          mkdir -p pages-repo/dcision2026
           cp voterguide.html pages-repo/dcision2026/voterguide.html
-          cp Headshots/*.png pages-repo/dcision2026/headshots/
+          cp -r Headshots pages-repo/dcision2026/Headshots
 
       - name: Commit and push
         run: |
